@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS telemetry_message
+CREATE TABLE telemetry_message
 (
     uuid                  varchar PRIMARY KEY,
     agent_id              varchar,
@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS telemetry_message
     quality_score         int
 );
 
-CREATE TABLE IF NOT EXISTS agent
+CREATE TABLE agent
 (
     uuid         varchar PRIMARY KEY,
     agent_id     varchar,
