@@ -1,6 +1,6 @@
 package com.app.stock.messageConsumer.service;
 
-import com.app.stock.messageConsumer.entity.TelemetryMessage;
+import com.app.stock.messageGenerator.entity.TelemetryMessage;
 import com.app.stock.messageConsumer.repository.TelemetryMessageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

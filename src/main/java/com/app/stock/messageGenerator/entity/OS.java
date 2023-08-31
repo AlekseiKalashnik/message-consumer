@@ -1,4 +1,4 @@
-package com.app.stock.messageConsumer.entity;
+package com.app.stock.messageGenerator.entity;
 
 public enum OS {
     IOS("IOS"),
