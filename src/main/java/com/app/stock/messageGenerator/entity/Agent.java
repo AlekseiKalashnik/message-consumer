@@ -32,5 +32,5 @@ public class Agent {
     private OS os;
 
     @Column("message_uuid")
-    private TelemetryMessage telemetryMessage;
+    private String telemetryMessage;
 }
