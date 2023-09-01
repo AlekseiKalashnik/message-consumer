@@ -20,11 +20,22 @@ public class KafkaConsumer {
 
     private String payload;
     private final TelemetryMessageRepository messageRepository;
+    private final AgentRepository agentRepository;
 
     @KafkaListener(topics = "${topic.name}", groupId = "${spring.kafka.consumer.group-id}")
-    public Mono<TelemetryMessage> getMessageFromTopic(TelemetryMessage message) {
+    public void getMessageFromTopic(TelemetryMessage message) {
         payload = message.toString();
-        log.info("kafka message consumed='{}'", payload + System.currentTimeMillis());
-        return this.messageRepository.save(message).doOnSuccess(u -> log.info("message has saved"));
+        log.info("kafka message consumed in - " + System.currentTimeMillis());
+        messageRepository.save(message.toBuilder()
+                        .UUID(message.getUUID())
+                        .agentId(message.getAgentId())
+                        .previousMessageTime(message.getPreviousMessageTime())
+                        .activeService(message.getActiveService())
+                        .qualityScore(message.getQualityScore())
+                        .agents(message.getAgents())
+                        .build());
+        log.info("message has saved");
+        agentRepository.saveAll(message.getAgents());
+        log.info("\n please check agents list \n");
     }
 }

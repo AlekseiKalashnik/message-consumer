@@ -30,4 +30,7 @@ public class Agent {
 
     @Column("os")
     private OS os;
+
+    @Column("message_uuid")
+    private TelemetryMessage telemetryMessage;
 }
