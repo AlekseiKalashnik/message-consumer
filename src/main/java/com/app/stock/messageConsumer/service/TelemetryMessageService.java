@@ -23,14 +23,6 @@ public class TelemetryMessageService {
         List<Agent> agentList = message.getAgents();
         agentRepository.saveAll(agentList);
         log.info("agents have saved");
-        return messageRepository.save(message.toBuilder()
-                .UUID(message.getUUID())
-                .agentId(message.getAgentId())
-                .previousMessageTime(message.getPreviousMessageTime())
-                .activeService(message.getActiveService())
-                .qualityScore(message.getQualityScore())
-                .agents(agentList)
-                .build()
-        ).doOnSuccess(u -> log.info("message has saved"));
+        return messageRepository.save(message).doOnSuccess(u -> log.info("message has saved"));
     }
 }

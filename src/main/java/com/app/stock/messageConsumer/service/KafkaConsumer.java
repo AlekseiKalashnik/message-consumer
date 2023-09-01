@@ -12,9 +12,8 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class KafkaConsumer {
 
-    private final TelemetryMessageService messageService;
-
     private String payload;
+    private final TelemetryMessageService messageService;
 
     @KafkaListener(topics = "${topic.name}", groupId = "${spring.kafka.consumer.group-id}")
     public Mono<TelemetryMessage> getMessageFromTopic(TelemetryMessage message) {

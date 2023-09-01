@@ -12,9 +12,9 @@ import org.springframework.data.relational.core.mapping.Table;
 @Setter
 @Builder
 @ToString
+@Table("agent")
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "agent")
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class Agent {

@@ -12,11 +12,11 @@ import java.util.List;
 
 @Getter
 @Setter
-@Builder(toBuilder = true)
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "telemetry_message")
+@Builder(toBuilder = true)
+@Table("telemetry_message")
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class TelemetryMessage {
