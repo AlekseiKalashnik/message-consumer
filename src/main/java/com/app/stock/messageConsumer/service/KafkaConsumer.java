@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 @Slf4j
 @Service
@@ -16,9 +17,9 @@ public class KafkaConsumer {
     private String payload;
 
     @KafkaListener(topics = "${topic.name}", groupId = "${spring.kafka.consumer.group-id}")
-    public void getMessageFromTopic(TelemetryMessage message) {
-        log.info("kafka message consumed='{}'", message.toString() + System.currentTimeMillis());
-        messageService.saveMessage(message);
+    public Mono<TelemetryMessage> getMessageFromTopic(TelemetryMessage message) {
         payload = message.toString();
+        log.info("kafka message consumed='{}'", payload + System.currentTimeMillis());
+        return messageService.saveMessage(message);
     }
 }

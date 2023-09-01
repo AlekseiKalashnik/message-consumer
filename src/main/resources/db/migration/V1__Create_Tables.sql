@@ -17,7 +17,7 @@ CREATE TABLE if not exists telemetry_message
 );
 
 
-insert into agent values ('oqp', 'PC', 'SONY', 'IOS');
+insert into agent values ('ppooop', 'PC', 'SONY', 'IOS');
 
 -- insert into agent values ('rrr', 'PC', 'SONY', 'IOS');
 -- insert into telemetry_message values ('mmm',
