@@ -1,21 +1,23 @@
-CREATE TABLE if not exists agent
-(
-    uuid         varchar PRIMARY KEY,
-    agent_id     varchar,
-    manufacturer varchar,
-    os           varchar
-);
+drop table if exists telemetry_message;
+drop table if exists agent;
 
-CREATE TABLE if not exists telemetry_message
+CREATE TABLE telemetry_message
 (
     uuid                  varchar PRIMARY KEY,
     agent_id              varchar,
     previous_message_time bigint,
     active_service        varchar,
-    quality_score         int,
-    agent_uuid varchar REFERENCES agent (uuid)
+    quality_score         int
 );
 
+CREATE TABLE agent
+(
+    uuid         varchar PRIMARY KEY,
+    agent_id     varchar,
+    manufacturer varchar,
+    os           varchar,
+    message_uuid varchar REFERENCES telemetry_message (uuid)
+);
 
 -- insert into agent values ('ppooop', 'PC', 'SONY', 'IOS');
 
