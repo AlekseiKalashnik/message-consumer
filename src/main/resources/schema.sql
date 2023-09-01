@@ -4,7 +4,8 @@ CREATE TABLE telemetry_message
     agent_id              varchar,
     previous_message_time bigint,
     active_service        varchar,
-    quality_score         int
+    quality_score         int,
+    agent_uuid varchar REFERENCES agent (uuid)
 );
 
 CREATE TABLE agent
@@ -12,6 +13,5 @@ CREATE TABLE agent
     uuid         varchar PRIMARY KEY,
     agent_id     varchar,
     manufacturer varchar,
-    os           varchar,
-    FOREIGN KEY (agent_id) REFERENCES telemetry_message (agent_id)
+    os           varchar
 );

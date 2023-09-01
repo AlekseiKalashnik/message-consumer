@@ -36,5 +36,6 @@ public class TelemetryMessage {
     @Column("quality_score")
     private Integer qualityScore;
 
+    @Column("agent_uuid")
     private List<Agent> agents;
 }
