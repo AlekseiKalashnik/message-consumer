@@ -16,7 +16,7 @@ CREATE TABLE agent
     agent_id     varchar,
     manufacturer varchar,
     os           varchar,
-    message_uuid varchar REFERENCES telemetry_message (uuid)
+    message_uuid varchar
 );
 
 -- insert into agent values ('ppooop', 'PC', 'SONY', 'IOS');

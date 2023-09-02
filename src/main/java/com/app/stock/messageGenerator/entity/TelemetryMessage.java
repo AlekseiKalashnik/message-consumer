@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -36,6 +37,7 @@ public class TelemetryMessage {
     @Column("quality_score")
     private Integer qualityScore;
 
+    @Transient
     @Column("agent_uuid")
     private List<Agent> agents;
 }

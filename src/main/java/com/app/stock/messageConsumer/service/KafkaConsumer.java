@@ -8,9 +8,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Mono;
+import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.Flux;
 
-import java.util.Collections;
 import java.util.List;
 
 @Slf4j
@@ -22,20 +22,24 @@ public class KafkaConsumer {
     private final TelemetryMessageRepository messageRepository;
     private final AgentRepository agentRepository;
 
+    @Transactional
     @KafkaListener(topics = "${topic.name}", groupId = "${spring.kafka.consumer.group-id}")
+
     public void getMessageFromTopic(TelemetryMessage message) {
         payload = message.toString();
         log.info("kafka message consumed in - " + System.currentTimeMillis());
-        messageRepository.save(message.toBuilder()
+        List<Agent> agents = message.getAgents();
+        log.info("{} - agents saved", agents.size());
+        agentRepository.saveAll(Flux.fromIterable(agents)).subscribe();
+
+        messageRepository.save(TelemetryMessage.builder()
                         .UUID(message.getUUID())
                         .agentId(message.getAgentId())
                         .previousMessageTime(message.getPreviousMessageTime())
                         .activeService(message.getActiveService())
                         .qualityScore(message.getQualityScore())
-                        .agents(message.getAgents())
-                        .build());
-        log.info("message has saved");
-        agentRepository.saveAll(message.getAgents());
-        log.info("\n please check agents list \n");
+                        .build())
+                .subscribe();
+        log.info("message saved");
     }
 }
