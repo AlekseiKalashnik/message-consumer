@@ -21,7 +21,6 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class TelemetryMessage {
-    @Id
     @Column("uuid")
     private String UUID;
 

@@ -18,7 +18,6 @@ import org.springframework.data.relational.core.mapping.Table;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class Agent {
-    @Id
     @Column("uuid")
     private String UUID;
 
