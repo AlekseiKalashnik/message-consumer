@@ -22,9 +22,7 @@ public class KafkaConsumer {
     private final TelemetryMessageRepository messageRepository;
     private final AgentRepository agentRepository;
 
-    @Transactional
     @KafkaListener(topics = "${topic.name}", groupId = "${spring.kafka.consumer.group-id}")
-
     public void getMessageFromTopic(TelemetryMessage message) {
         payload = message.toString();
         log.info("kafka message consumed in - " + System.currentTimeMillis());

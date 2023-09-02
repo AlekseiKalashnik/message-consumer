@@ -1,7 +1,7 @@
 package com.app.stock.messageConsumer.repository;
 
 import com.app.stock.messageGenerator.entity.Agent;
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import org.springframework.data.r2dbc.repository.R2dbcRepository;
 
-public interface AgentRepository extends ReactiveCrudRepository<Agent, String> {
+public interface AgentRepository extends R2dbcRepository<Agent, String> {
 }
