@@ -26,9 +26,9 @@ public class KafkaConsumer {
     public void getMessageFromTopic(TelemetryMessage message) {
         payload = message.toString();
         log.info("kafka message consumed in - " + System.currentTimeMillis());
-        List<Agent> agents = message.getAgents();
-        log.info("{} - agents saved", agents.size());
-        agentRepository.saveAll(Flux.fromIterable(agents)).subscribe();
+        Flux<Agent> agents = Flux.fromIterable(message.getAgents());
+        agentRepository.saveAll(agents).subscribe();
+        log.info("{} - agents saved");
 
         messageRepository.save(TelemetryMessage.builder()
                         .UUID(message.getUUID())
